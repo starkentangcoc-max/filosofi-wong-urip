@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="Kenali kecenderungan filosofi hidupmu lewat refleksi singkat dan temukan bacaan untuk menjelajahinya.">
+  <title>Ruang Makna — Kenali filosofi hidupmu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f5f2e9;
+      --ink: #202b25;
+      --muted: #6b746c;
+      --green: #355d4b;
+      --green-dark: #244535;
+      --orange: #d78a56;
+      --line: #deddd2;
+      --white: #fffefa;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; gap: 11px; align-items: center; color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: -.03em; }
+    .brand-mark { width: 31px; height: 31px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #fff; font-family: var(--serif); font-size: 19px; }
+    .nav-note { font-size: 12px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+    .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 70px; align-items: center; padding: 82px 0 70px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--green); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; font-size: 11px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin: 18px 0 20px; font: 600 clamp(44px, 6vw, 72px)/1.04 var(--serif); letter-spacing: -.045em; max-width: 650px; }
+    h1 em { color: var(--green); font-weight: 500; }
+    .hero-copy { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 490px; margin-bottom: 27px; }
+    .primary-btn { border: 0; border-radius: 3px; padding: 15px 21px; background: var(--green); color: white; font-weight: 600; cursor: pointer; transition: background .2s, transform .2s; }
+    .primary-btn:hover { background: var(--green-dark); transform: translateY(-2px); }
+    .hero-meta { margin-left: 14px; color: var(--muted); font-size: 12px; }
+    .hero-art { position: relative; min-height: 340px; display: grid; place-items: center; }
+    .sun { width: 270px; height: 270px; position: absolute; top: 16px; right: 12%; border-radius: 50%; background: #e8c99e; }
+    .art-card { position: relative; z-index: 1; background: var(--green); width: min(310px, 86%); min-height: 260px; color: #fff; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 16px 18px 0 #d9dfd3; transform: rotate(-3deg); }
+    .art-symbol { font: 100px/.8 var(--serif); color: #e7c89d; text-align: center; }
+    .art-quote { font: 21px/1.35 var(--serif); }
+    .art-caption { color: #d9e3da; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .section-heading { max-width: 610px; margin-bottom: 27px; }
+    .section-heading h2 { font: 600 38px/1.2 var(--serif); margin: 12px 0; letter-spacing: -.03em; }
+    .section-heading p { color: var(--muted); line-height: 1.7; margin-bottom: 0; }
+    .quiz-section { padding: 47px 0 84px; border-top: 1px solid var(--line); }
+    .quiz-box { background: var(--white); border: 1px solid var(--line); padding: 32px; }
+    .quiz-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 16px; }
+    .quiz-top strong { font-size: 13px; }
+    .quiz-top span { color: var(--muted); font-size: 12px; }
+    .progress-track { height: 4px; background: #e9e9df; margin-bottom: 24px; overflow: hidden; }
+    .progress-fill { width: 0; height: 100%; background: var(--orange); transition: width .25s; }
+    .question-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .question { border: 1px solid var(--line); padding: 17px 18px; min-height: 144px; display: flex; flex-direction: column; justify-content: space-between; }
+    .question p { font: 17px/1.45 var(--serif); margin: 0 0 14px; }
+    .question small { color: var(--muted); text-transform: uppercase; letter-spacing: .1em; font-size: 9px; }
+    .scale { display: flex; gap: 5px; align-items: center; }
+    .scale button { flex: 1; min-height: 33px; border: 1px solid var(--line); color: var(--muted); background: transparent; cursor: pointer; font-size: 11px; transition: all .15s; }
+    .scale button:hover { border-color: var(--green); color: var(--green); }
+    .scale button[aria-pressed="true"] { color: #fff; border-color: var(--green); background: var(--green); }
+    .scale-ends { display: flex; justify-content: space-between; color: #888e87; font-size: 9px; margin-top: 6px; }
+    .quiz-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 15px; }
+    .quiz-hint { font-size: 12px; color: var(--muted); }
+    .primary-btn:disabled { background: #a9b0a7; cursor: not-allowed; transform: none; }
+    .result { display: none; margin-top: 27px; border-top: 1px solid var(--line); padding-top: 28px; }
+    .result.show { display: block; animation: appear .35s ease-out; }
+    @keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .result-label { color: var(--green); text-transform: uppercase; letter-spacing: .15em; font-weight: 700; font-size: 10px; }
+    .result h3 { font: 600 36px var(--serif); margin: 8px 0; }
+    .result-intro { max-width: 760px; color: var(--muted); line-height: 1.75; }
+    .result-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 28px; margin-top: 24px; }
+    .result-detail { background: #f5f2e9; padding: 22px; }
+    .result-detail h4, .thinkers h4 { font: 600 19px var(--serif); margin: 0 0 12px; }
+    .result-detail p { color: #505b52; line-height: 1.7; font-size: 13px; margin-bottom: 13px; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .pros-cons h5 { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 8px; color: var(--green); }
+    .pros-cons div:last-child h5 { color: #a3633b; }
+    .pros-cons ul { padding-left: 17px; margin: 0; color: #505b52; font-size: 12px; line-height: 1.65; }
+    .thinkers { padding: 22px; border: 1px solid var(--line); }
+    .thinkers-note { color: var(--muted); font-size: 11px; line-height: 1.5; margin: -4px 0 13px; }
+    .thinker { display: flex; gap: 12px; align-items: center; border-top: 1px solid var(--line); padding: 12px 0; }
+    .thinker img, .thinker-placeholder { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #deddd2; flex: none; }
+    .thinker-placeholder { display: grid; place-items: center; color: var(--green); font: 18px var(--serif); }
+    .thinker strong { display: block; font-size: 12px; }
+    .thinker span { font-size: 10px; color: var(--muted); }
+    .score-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .score-chip { border: 0; background: #e9eee7; padding: 10px 12px; font-size: 11px; color: var(--green); border-radius: 2px; cursor: pointer; transition: background .15s, color .15s; }
+    .score-chip:hover, .score-chip[aria-pressed="true"] { background: var(--green); color: #fff; }
+    .score-chip:focus-visible, .feedback-link:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+    .reset-btn { border: 0; background: none; padding: 0; color: var(--green); text-decoration: underline; cursor: pointer; font-size: 12px; }
+    .faq { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 26px; }
+    .faq h3 { font: 600 28px/1.2 var(--serif); margin: 0 0 8px; }
+    .faq-intro { color: var(--muted); font-size: 13px; line-height: 1.7; margin-bottom: 18px; }
+    .faq details { border-top: 1px solid var(--line); padding: 15px 0; }
+    .faq details:last-child { border-bottom: 1px solid var(--line); }
+    .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+    .faq details p { margin: 10px 0 0; color: #505b52; font-size: 13px; line-height: 1.75; max-width: 800px; }
+    .feedback { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 20px; }
+    .feedback p { color: var(--muted); font-size: 12px; line-height: 1.6; margin-bottom: 12px; }
+    .feedback-link { display: inline-block; padding: 11px 15px; border-radius: 3px; background: var(--green); color: #fff; font-size: 12px; font-weight: 600; text-decoration: none; transition: background .2s; }
+    .feedback-link:hover { background: var(--green-dark); }
+    .about { padding: 56px 0 66px; background: #e8e9df; }
+    .about-inner { display: grid; grid-template-columns: .7fr 1.3fr; gap: 60px; align-items: start; }
+    .about h2 { font: 600 32px var(--serif); margin: 10px 0 0; }
+    .about p { color: #566157; line-height: 1.8; font-size: 13px; margin-bottom: 12px; }
+    footer { padding: 22px 0; color: var(--muted); font-size: 11px; display: flex; justify-content: space-between; gap: 15px; }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; gap: 18px; padding: 56px 0 45px; }
+      .hero-art { min-height: 270px; }
+      .sun { width: 220px; height: 220px; right: 18%; }
+      .art-card { min-height: 220px; }
+      .question-list { grid-template-columns: 1fr; }
+      .result-grid, .about-inner { grid-template-columns: 1fr; gap: 20px; }
+      .quiz-box { padding: 20px; }
+      .about { padding: 42px 0; }
+    }
+    @media (max-width: 480px) {
+      .wrap { width: min(100% - 32px, 1120px); }
+      .nav-note { font-size: 9px; }
+      .hero-meta { display: block; margin: 12px 0 0; }
+      .quiz-actions { align-items: flex-start; flex-direction: column; }
+      .quiz-actions .primary-btn { width: 100%; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .section-heading h2 { font-size: 32px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#" aria-label="Ruang Makna, beranda"><span class="brand-mark">r</span> ruang makna</a>
+    <span class="nav-note">Sebuah ruang untuk bertanya</span>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Jelajahi cara pandangmu</div>
+        <h1>Hidupmu berpijak pada <em>makna</em> yang mana?</h1>
+        <p class="hero-copy">Jawab beberapa pernyataan tentang hidup, pilihan, dan makna. Temukan aliran filosofi yang paling dekat dengan cara pandangmu—bukan label yang mengikatmu.</p>
+        <button class="primary-btn" id="start-button">Mulai refleksi <span aria-hidden="true">→</span></button>
+        <span class="hero-meta">24 pernyataan · sekitar 4 menit</span>
+      </div>
+      <div class="hero-art" aria-label="Kutipan reflektif">
+        <div class="sun"></div>
+        <div class="art-card">
+          <div class="art-caption">Pertanyaan yang tak lekang</div>
+          <div class="art-symbol" aria-hidden="true">“</div>
+          <div class="art-quote">Hidup bukan tentang menemukan semua jawaban, melainkan berani terus bertanya.</div>
+          <div class="art-caption">Ruang Makna</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="refleksi">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Refleksi singkat</div>
+          <h2>Pilih yang paling terasa benar bagimu.</h2>
+          <p>Tidak ada jawaban benar atau salah. Jawablah sesuai dirimu saat ini, bukan menurut apa yang terdengar paling bijak. Refleksi ini mencakup delapan aliran, dari Stoisisme dan Nihilisme hingga Fatalisme, Epikureanisme, dan Pragmatisme.</p>
+        </div>
+        <div class="quiz-box">
+          <div class="quiz-top"><strong>Pernyataan refleksi</strong><span id="answered-count">0 dari 24 dijawab</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Progres kuis" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0"><div class="progress-fill"></div></div>
+          <div class="question-list" id="question-list"></div>
+          <div class="quiz-actions">
+            <span class="quiz-hint" id="quiz-hint">Pilih satu jawaban pada setiap pernyataan untuk melihat hasil.</span>
+            <button class="primary-btn" id="result-button" disabled>Lihat hasilku <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="result" id="result" aria-live="polite"></div>
+          <section class="faq" id="faq" aria-labelledby="faq-title" hidden>
+            <h3 id="faq-title">Pertanyaan yang sering ditanyakan</h3>
+            <p class="faq-intro">Hasil kuis bisa menjadi awal untuk mengenal diri dan berbagai gagasan filosofi.</p>
+            <details>
+              <summary>Apa itu filosofi hidup?</summary>
+              <p>Filosofi hidup adalah kumpulan nilai, keyakinan, dan prinsip yang membantu seseorang memahami makna hidup serta menentukan cara bertindak. Filosofi hidup tidak harus mengikuti satu aliran tertentu.</p>
+            </details>
+            <details>
+              <summary>Bagaimana cara menemukan filosofi hidupku sendiri?</summary>
+              <p>Perhatikan nilai yang kamu pegang saat membuat keputusan, pengalaman yang terasa bermakna, dan hal yang tidak ingin kamu kompromikan. Baca berbagai pemikiran, tanyakan alasan di balik keyakinanmu, lalu lihat apakah tindakan sehari-harimu selaras dengannya. Jawabannya boleh berkembang seiring waktu.</p>
+            </details>
+            <details>
+              <summary>Apakah hasil kuis ini pasti menggambarkan diriku?</summary>
+              <p>Tidak. Kuis ini adalah alat refleksi sederhana, bukan tes psikologi atau penilaian ilmiah. Hasilnya menunjukkan kecenderungan pada jawaban yang kamu pilih saat ini, bukan identitas tetap.</p>
+            </details>
+            <details>
+              <summary>Bisakah aku memiliki lebih dari satu filosofi hidup?</summary>
+              <p>Bisa. Gagasan dari beberapa aliran dapat saling melengkapi dalam pandangan seseorang. Hasil yang berdekatan menunjukkan irisan tersebut, bukan bahwa kamu harus memilih satu label saja.</p>
+            </details>
+            <details>
+              <summary>Apa bedanya fatalisme dengan menerima hal yang tak bisa dikendalikan?</summary>
+              <p>Fatalisme menekankan bahwa hasil tertentu akan terjadi sekalipun seseorang bertindak berbeda. Menerima hal di luar kendali, seperti dalam Stoisisme, tidak selalu berarti menyerah: kita tetap bertanggung jawab atas pilihan dan tindakan yang masih bisa dilakukan. Keduanya tidak sama dengan determinisme.</p>
+            </details>
+            <div class="feedback">
+              <h3>Beri masukan kepada pembuat</h3>
+              <p>Punya saran atau menemukan hal yang perlu diperbaiki? Kirim pesan melalui WhatsApp.</p>
+              <a class="feedback-link" href="https://wa.me/6289637760930?text=Halo%2C%20saya%20ingin%20memberi%20masukan%20tentang%20Ruang%20Makna." target="_blank" rel="noopener noreferrer">Beri masukan via WhatsApp <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="wrap about-inner">
+        <div><div class="eyebrow">Catatan penting</div><h2>Filosofi bukan kotak.</h2></div>
+        <div>
+          <p>Hasil ini adalah titik awal untuk mengenal gagasan, bukan tes psikologi atau penilaian ilmiah. Seseorang bisa memiliki pandangan yang beririsan dengan beberapa aliran dan berubah seiring pengalaman hidup.</p>
+          <p>Penjelasan tentang kelebihan dan tantangan tiap aliran juga bukan vonis. Gunakan sebagai bahan berpikir, lalu baca karya para filsufnya untuk membentuk pemahamanmu sendiri.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>© Ruang Makna · Dibuat untuk menemani refleksi.</span><span>Terus bertanya, terus bertumbuh.</span></footer>
+
+  <script>
+    const questions = [
+      { text: "Aku berusaha membedakan hal yang bisa kuubah dari hal yang perlu kuterima.", tag: "Menerima dan bertindak", scores: { stoicism: 1 } },
+      { text: "Karakter dan kebajikan lebih penting daripada kekayaan, status, atau pujian.", tag: "Kebajikan", scores: { stoicism: 1 } },
+      { text: "Saat menghadapi kesulitan, aku ingin merespons dengan pertimbangan jernih, bukan terbawa dorongan sesaat.", tag: "Kejernihan batin", scores: { stoicism: 1 } },
+      { text: "Manusia membentuk dirinya melalui pilihan dan tindakan yang diambil.", tag: "Pilihan membentuk diri", scores: { existentialism: 1 } },
+      { text: "Kebebasan memilih juga berarti bertanggung jawab atas konsekuensi pilihan.", tag: "Kebebasan dan tanggung jawab", scores: { existentialism: 1 } },
+      { text: "Aku ingin menjalani hidup secara autentik, meski itu berarti mempertanyakan harapan orang lain.", tag: "Menjadi diri sendiri", scores: { existentialism: 1 } },
+      { text: "Aku meragukan bahwa hidup memiliki tujuan atau makna objektif yang berlaku bagi semua orang.", tag: "Makna universal", scores: { nihilism: 1 } },
+      { text: "Nilai yang sering dianggap mutlak layak diperiksa, karena bisa saja diwariskan tanpa alasan kuat.", tag: "Mempertanyakan nilai", scores: { nihilism: 1 } },
+      { text: "Jika tidak ada dasar yang meyakinkan bagi suatu keyakinan, aku bersedia mempertanyakan atau menolaknya.", tag: "Keraguan mendasar", scores: { nihilism: 1 } },
+      { text: "Aku tetap mencari makna meskipun dunia mungkin tidak menyediakan jawaban yang pasti.", tag: "Mencari tanpa kepastian", scores: { absurdism: 1 } },
+      { text: "Ketegangan antara keinginan manusia akan makna dan dunia yang tak memberi jawaban adalah bagian hidup.", tag: "Ketegangan absurditas", scores: { absurdism: 1 } },
+      { text: "Menghadapi ketidakpastian dengan sadar lebih baik daripada menyerah atau berpura-pura punya semua jawaban.", tag: "Tetap hidup dan bertanya", scores: { absurdism: 1 } },
+      { text: "Martabat dan kesejahteraan manusia seharusnya menjadi pertimbangan penting dalam mengambil keputusan.", tag: "Martabat manusia", scores: { humanism: 1 } },
+      { text: "Empati, nalar, dan kerja sama dapat membantu manusia membangun kehidupan yang lebih baik.", tag: "Empati dan nalar", scores: { humanism: 1 } },
+      { text: "Kebaikan bagi sesama tetap berharga, meskipun tidak ada imbalan yang menanti.", tag: "Kebaikan bersama", scores: { humanism: 1 } },
+      { text: "Pada akhirnya, hasil tertentu akan terjadi sekalipun seseorang memilih bertindak dengan cara berbeda.", tag: "Hasil yang tak terhindarkan", scores: { fatalism: 1 } },
+      { text: "Ada kejadian penting dalam hidup yang menurutku sudah ditakdirkan dan tak dapat diubah oleh tindakan manusia.", tag: "Takdir dan tindakan", scores: { fatalism: 1 } },
+      { text: "Menerima bahwa hasil akhir tidak selalu berada dalam kendaliku terasa lebih masuk akal daripada percaya aku bisa mengubah segalanya.", tag: "Menerima takdir", scores: { fatalism: 1 } },
+      { text: "Hidup yang baik lebih dekat dengan ketenangan batin dan bebas dari penderitaan daripada kemewahan.", tag: "Ketenangan dan kesederhanaan", scores: { epicureanism: 1 } },
+      { text: "Persahabatan, rasa cukup, dan menikmati hal sederhana adalah sumber kebahagiaan yang penting.", tag: "Persahabatan dan rasa cukup", scores: { epicureanism: 1 } },
+      { text: "Sebelum mengejar kesenangan, aku mempertimbangkan apakah kenikmatan itu akan membawa masalah atau penderitaan setelahnya.", tag: "Memilih kenikmatan dengan bijak", scores: { epicureanism: 1 } },
+      { text: "Gagasan atau keyakinan paling baik dinilai dari dampaknya dalam kehidupan nyata.", tag: "Gagasan dalam praktik", scores: { pragmatism: 1 } },
+      { text: "Ketika sebuah cara tidak berhasil, aku lebih suka menguji pendekatan lain daripada terus berpegang pada teori.", tag: "Belajar dari pengalaman", scores: { pragmatism: 1 } },
+      { text: "Keyakinan yang baik seharusnya membantu kita memahami masalah dan mengambil tindakan yang bermanfaat.", tag: "Pemikiran yang berguna", scores: { pragmatism: 1 } }
+    ];
+
+    const philosophies = {
+      stoicism: {
+        name: "Stoisisme",
+        description: "Stoisisme mengajak kita membedakan hal yang berada dalam kendali—penilaian, niat, dan tindakan—dari hal yang tidak. Kebajikan dan kejernihan batin dianggap lebih penting daripada status atau keberuntungan.",
+        strengths: ["Membantu menghadapi kesulitan dengan lebih tenang.", "Mendorong disiplin diri dan fokus pada tindakan yang bisa dipilih."],
+        limits: ["Bisa disalahpahami sebagai menekan emosi atau pasrah pada ketidakadilan.", "Terlalu menekankan kendali pribadi dapat mengabaikan kondisi sosial."],
+        thinkers: [{ name: "Marcus Aurelius", note: "Kaisar Romawi dan filsuf Stoik", wiki: "Marcus_Aurelius" }, { name: "Epictetus", note: "Filsuf Stoik Yunani-Romawi", wiki: "Epictetus" }]
+      },
+      existentialism: {
+        name: "Eksistensialisme",
+        description: "Eksistensialisme menaruh perhatian pada kebebasan, pilihan, dan tanggung jawab manusia. Alih-alih menunggu makna yang sudah tersedia, kita membentuk hidup melalui keputusan dan cara kita menjalaninya.",
+        strengths: ["Menguatkan rasa tanggung jawab dan keaslian diri.", "Membuka ruang untuk memilih arah hidup sendiri."],
+        limits: ["Kebebasan yang besar dapat terasa membebani atau memicu kecemasan.", "Risiko terlalu berpusat pada pilihan individu dan melupakan keterbatasan nyata."],
+        thinkers: [{ name: "Simone de Beauvoir", note: "Filsuf eksistensialis dan feminis", wiki: "Simone_de_Beauvoir" }, { name: "Jean-Paul Sartre", note: "Filsuf dan penulis Prancis", wiki: "Jean-Paul_Sartre" }]
+      },
+      nihilism: {
+        name: "Nihilisme",
+        description: "Nihilisme mempertanyakan atau menolak adanya makna, nilai, maupun tujuan objektif yang berlaku universal. Sikap ini bukan satu ajaran tunggal: bagi sebagian orang ia menjadi tantangan untuk memeriksa nilai yang diwariskan, bukan kesimpulan bahwa hidup pasti tak berharga.",
+        strengths: ["Mendorong pemeriksaan kritis terhadap nilai dan otoritas.", "Dapat membuka ruang untuk merumuskan nilai secara jujur."],
+        limits: ["Jika dipahami sebagai kesimpulan final, bisa terasa mengarah pada kehampaan atau sinisme.", "Mengkritik nilai lama belum otomatis memberi panduan untuk bertindak."],
+        thinkers: [{ name: "Friedrich Nietzsche", note: "Mengulas krisis nihilisme; bukan sekadar 'penganut nihilisme'", wiki: "Friedrich_Nietzsche" }, { name: "Ivan Turgenev", note: "Mempopulerkan istilah dalam novel Fathers and Sons", wiki: "Ivan_Turgenev" }]
+      },
+      absurdism: {
+        name: "Absurdisme",
+        description: "Absurdisme berangkat dari perjumpaan antara hasrat manusia untuk menemukan makna dan dunia yang tidak memberi jawaban pasti. Albert Camus mengusulkan agar kita menyadari ketegangan itu dan tetap menjalani hidup dengan penuh kesadaran.",
+        strengths: ["Membantu hidup berdampingan dengan ketidakpastian.", "Menghargai kebebasan, pengalaman, dan keberanian untuk terus hidup."],
+        limits: ["Gagasan tentang absurditas bisa disalahartikan sebagai sikap apatis.", "Tidak selalu menawarkan aturan praktis untuk setiap keputusan sehari-hari."],
+        thinkers: [{ name: "Albert Camus", note: "Penulis dan pemikir absurdisme", wiki: "Albert_Camus" }, { name: "Søren Kierkegaard", note: "Pemikir pendahulu yang membahas absurditas", wiki: "Søren_Kierkegaard" }]
+      },
+      humanism: {
+        name: "Humanisme",
+        description: "Humanisme menekankan martabat, potensi, dan kesejahteraan manusia. Tradisi humanisme beragam, tetapi banyak bentuknya menempatkan nalar, empati, kebebasan, dan tanggung jawab bersama sebagai dasar membangun kehidupan yang lebih baik.",
+        strengths: ["Memberi perhatian kuat pada martabat dan kesejahteraan sesama.", "Mendorong empati, penalaran, pendidikan, dan kerja sama."],
+        limits: ["Jika terlalu berpusat pada manusia, kepentingan alam dan makhluk lain dapat terabaikan.", "Ada beragam versi humanisme, sehingga tidak selalu satu suara tentang nilai."],
+        thinkers: [{ name: "Erasmus", note: "Cendekiawan humanis Renaisans", wiki: "Desiderius_Erasmus" }, { name: "Martha Nussbaum", note: "Filsuf kontemporer tentang kemampuan manusia", wiki: "Martha_Nussbaum" }]
+      },
+      fatalism: {
+        name: "Fatalisme",
+        description: "Fatalisme adalah pandangan bahwa hasil atau kejadian tertentu akan terjadi terlepas dari pilihan yang kita ambil. Gagasan ini berbeda dari Stoisisme dan juga tidak sama dengan determinisme, yang menyatakan bahwa kejadian ditentukan oleh rangkaian sebab-akibat.",
+        strengths: ["Dapat membantu seseorang berdamai dengan keterbatasan kendali.", "Mengundang pertanyaan mendalam tentang takdir, kemungkinan, dan kebebasan."],
+        limits: ["Jika diterapkan secara mutlak, dapat melemahkan inisiatif dan tanggung jawab.", "Bisa mengaburkan perbedaan antara menerima hasil dan tetap berusaha memengaruhi keadaan."],
+        thinkers: [{ name: "Diodorus Cronus", note: "Filsuf Yunani yang dikenal lewat argumen tentang masa depan", wiki: "Diodorus_Cronus" }, { name: "Omar Khayyam", note: "Puisi-puisinya kerap ditafsirkan membahas takdir; tafsir beragam", wiki: "Omar_Khayyam" }]
+      },
+      epicureanism: {
+        name: "Epikureanisme",
+        description: "Epikureanisme, yang berawal dari ajaran Epicurus, memahami kebahagiaan bukan sebagai pesta tanpa batas, melainkan sebagai hidup yang tenteram, bebas dari rasa sakit yang tidak perlu, dan dipenuhi persahabatan serta kenikmatan sederhana. Keinginan dinilai dengan bijak, bukan dituruti begitu saja.",
+        strengths: ["Menghargai persahabatan, rasa cukup, dan kesenangan sederhana.", "Mendorong kita mempertimbangkan akibat jangka panjang dari keinginan."],
+        limits: ["Gagasan tentang kenikmatan dapat disalahpahami sebagai hidup berlebihan.", "Fokus pada ketenteraman pribadi perlu diseimbangkan dengan kewajiban sosial."],
+        thinkers: [{ name: "Epicurus", note: "Filsuf Yunani pendiri aliran Epikurean", wiki: "Epicurus" }, { name: "Lucretius", note: "Penyair Romawi yang mengembangkan gagasan Epikurean", wiki: "Lucretius" }]
+      },
+      pragmatism: {
+        name: "Pragmatisme",
+        description: "Pragmatisme menilai gagasan dengan melihat makna praktis, konsekuensi, dan bagaimana gagasan itu bekerja dalam pengalaman. Ini bukan sekadar memilih yang paling mudah, melainkan kesediaan menguji keyakinan dan memperbaikinya ketika bukti atau keadaan berubah.",
+        strengths: ["Mendorong pemikiran terbuka, pengujian, dan belajar dari pengalaman.", "Membantu menghubungkan gagasan dengan pemecahan masalah nyata."],
+        limits: ["Manfaat jangka pendek bisa terlalu diutamakan jika prinsip dan dampak jangka panjang dilupakan.", "Apa yang dianggap 'berhasil' dapat berbeda bagi orang atau kelompok yang berbeda."],
+        thinkers: [{ name: "William James", note: "Filsuf dan psikolog pragmatis Amerika", wiki: "William_James" }, { name: "John Dewey", note: "Filsuf pragmatis dan pemikir pendidikan", wiki: "John_Dewey" }]
+      }
+    };
+
+    const answers = new Array(questions.length).fill(null);
+    const questionList = document.getElementById("question-list");
+    const resultButton = document.getElementById("result-button");
+    const result = document.getElementById("result");
+    const answerLabels = ["Sangat tidak setuju", "Tidak setuju", "Ragu-ragu", "Setuju", "Sangat setuju"];
+
+    function renderQuestions() {
+      questionList.innerHTML = questions.map((question, index) => `
+        <article class="question">
+          <div><small>${String(index + 1).padStart(2, "0")} · ${question.tag}</small><p>${question.text}</p></div>
+          <div>
+            <div class="scale" role="group" aria-label="Jawaban untuk pernyataan ${index + 1}">
+              ${answerLabels.map((label, value) => `<button type="button" aria-label="${label}" aria-pressed="${answers[index] === value}" title="${label}" data-question="${index}" data-value="${value}">${value + 1}</button>`).join("")}
+            </div>
+            <div class="scale-ends"><span>Sangat tidak setuju</span><span>Sangat setuju</span></div>
+          </div>
+        </article>`).join("");
+    }
+
+    function updateProgress() {
+      const count = answers.filter(value => value !== null).length;
+      document.getElementById("answered-count").textContent = `${count} dari ${questions.length} dijawab`;
+      document.querySelector(".progress-fill").style.width = `${count / questions.length * 100}%`;
+      document.querySelector('[role="progressbar"]').setAttribute("aria-valuenow", count);
+      resultButton.disabled = count !== questions.length;
+      document.getElementById("quiz-hint").textContent = count === questions.length
+        ? "Semua terjawab. Siap melihat kecenderunganmu?"
+        : `Masih ada ${questions.length - count} pernyataan yang belum dijawab.`;
+    }
+
+    questionList.addEventListener("click", event => {
+      const button = event.target.closest("button[data-question]");
+      if (!button) return;
+      answers[Number(button.dataset.question)] = Number(button.dataset.value);
+      result.classList.remove("show");
+      document.getElementById("faq").hidden = true;
+      renderQuestions();
+      updateProgress();
+    });
+
+    function renderThinkers(thinkers) {
+      return thinkers.map(person => `
+        <div class="thinker">
+          <span class="thinker-placeholder" aria-hidden="true">${person.name.charAt(0)}</span>
+          <div><strong>${person.name}</strong><span>${person.note}</span></div>
+        </div>`).join("");
+    }
+
+    function renderSelectedPhilosophy(key, ranked) {
+      const profile = philosophies[key];
+      const isTop = key === ranked[0][0];
+      const allScoresZero = ranked[0][1] === 0;
+      const isClose = isTop && ranked[0][1] - ranked[1][1] <= Math.max(1.5, ranked[0][1] * .12);
+      const label = allScoresZero
+        ? "Penjelasan aliran yang dipilih"
+        : isTop
+          ? "Kecenderungan terkuatmu"
+          : "Penjelasan aliran yang dipilih";
+      const introduction = allScoresZero
+        ? `${profile.description} Jawabanmu belum menunjukkan kecenderungan kuat pada aliran-aliran ini.`
+        : `${profile.description}${isClose ? ` Ada irisan yang cukup dekat dengan ${philosophies[ranked[1][0]].name}; cara pandangmu mungkin memadukan keduanya.` : ""}`;
+      const profileContent = document.getElementById("result-profile");
+      profileContent.innerHTML = `
+        <div class="result-label">${label}</div>
+        <h3>${profile.name}${isTop && isClose ? " — dengan irisan" : ""}</h3>
+        <p class="result-intro">${introduction}</p>
+        <div class="result-grid">
+          <div class="result-detail">
+            <h4>Kekuatan & hal yang perlu direnungkan</h4>
+            <div class="pros-cons">
+              <div><h5>Kekuatan</h5><ul>${profile.strengths.map(item => `<li>${item}</li>`).join("")}</ul></div>
+              <div><h5>Tantangan</h5><ul>${profile.limits.map(item => `<li>${item}</li>`).join("")}</ul></div>
+            </div>
+          </div>
+          <aside class="thinkers"><h4>Tokoh untuk dikenal</h4>
+            <p class="thinkers-note">Tokoh yang pemikirannya terkait dengan aliran ini—bukan berarti semuanya memakai label yang sama.</p>
+            ${renderThinkers(profile.thinkers)}
+          </aside>
+        </div>`;
+      loadPortraits(profile.thinkers);
+    }
+
+    function calculateScores() {
+      const scores = Object.fromEntries(Object.keys(philosophies).map(key => [key, 0]));
+      questions.forEach((question, index) => {
+        const agreement = answers[index] - 2;
+        Object.entries(question.scores).forEach(([philosophy, weight]) => {
+          scores[philosophy] += Math.max(0, agreement) * weight;
+        });
+      });
+      const maximumScores = Object.fromEntries(Object.keys(philosophies).map(key => [
+        key,
+        questions.reduce((maximum, question) => maximum + (question.scores[key] || 0) * 3, 0)
+      ]));
+      const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      return { scores, maximumScores, ranked };
+    }
+
+    function showResult() {
+      if (answers.some(value => value === null)) return;
+      const { scores, maximumScores, ranked } = calculateScores();
+      const [topKey, topScore] = ranked[0];
+      document.getElementById("faq").hidden = false;
+      result.innerHTML = `
+        <div id="result-profile"></div>
+        <div class="score-list" aria-label="Pilih filosofi untuk membaca penjelasannya">
+          ${ranked.map(([key]) => {
+            const percentage = Math.round(scores[key] / maximumScores[key] * 100);
+            return `<button type="button" class="score-chip" data-philosophy="${key}" aria-pressed="${topScore > 0 && key === topKey}">${philosophies[key].name}: ${percentage}%</button>`;
+          }).join("")}
+        </div>
+        <p class="thinkers-note" style="margin-top:16px">Pilih skor filosofi untuk melihat penjelasan, kekuatan, tantangan, dan tokohnya. Persentase menunjukkan tingkat persetujuan terhadap pernyataan terkait, bukan ukuran ilmiah atau identitas tetap.</p>
+        <button type="button" class="reset-btn" id="reset-button">Ulangi refleksi</button>`;
+      if (topScore === 0) {
+        document.getElementById("result-profile").innerHTML = `
+          <div class="result-label">Ruang untuk terus bertanya</div>
+          <h3>Pandanganmu masih terbuka.</h3>
+          <p class="result-intro">Jawabanmu belum menunjukkan kecenderungan kuat pada aliran-aliran ini. Itu bukan berarti kamu tidak punya filosofi hidup—bisa jadi pandanganmu memadukan gagasan lain, masih berkembang, atau pernyataan ini belum mewakilimu.</p>
+          <div class="result-detail"><h4>Untuk direnungkan</h4><p>Nilai apa yang tetap ingin kamu pegang saat keadaan sulit? Dari mana nilai itu berasal, dan bagaimana nilainya terlihat dalam tindakanmu sehari-hari?</p></div>
+        `;
+      } else {
+        renderSelectedPhilosophy(topKey, ranked);
+      }
+      result.classList.add("show");
+      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    async function loadPortraits(thinkers) {
+      for (const person of thinkers) {
+        try {
+          const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(person.wiki)}`);
+          if (!response.ok) continue;
+          const data = await response.json();
+          if (!data.thumbnail?.source) continue;
+          const row = [...result.querySelectorAll(".thinker")].find(item => item.textContent.includes(person.name));
+          if (!row) continue;
+          const image = document.createElement("img");
+          image.src = data.thumbnail.source;
+          image.alt = `Potret ${person.name}`;
+          image.loading = "lazy";
+          image.onerror = () => image.replaceWith(makePlaceholder(person.name));
+          row.querySelector(".thinker-placeholder").replaceWith(image);
+        } catch (error) {
+          // Hasil tetap dapat digunakan tanpa koneksi ke sumber gambar.
+        }
+      }
+    }
+
+    function makePlaceholder(name) {
+      const placeholder = document.createElement("span");
+      placeholder.className = "thinker-placeholder";
+      placeholder.setAttribute("aria-hidden", "true");
+      placeholder.textContent = name.charAt(0);
+      return placeholder;
+    }
+
+    resultButton.addEventListener("click", showResult);
+    result.addEventListener("click", event => {
+      const philosophyButton = event.target.closest("button[data-philosophy]");
+      if (philosophyButton) {
+        const key = philosophyButton.dataset.philosophy;
+        const { ranked } = calculateScores();
+        result.querySelectorAll("button[data-philosophy]").forEach(button => {
+          button.setAttribute("aria-pressed", String(button === philosophyButton));
+        });
+        renderSelectedPhilosophy(key, ranked);
+        document.getElementById("result-profile").scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      if (event.target.id === "reset-button") {
+        answers.fill(null);
+        result.classList.remove("show");
+        document.getElementById("faq").hidden = true;
+        renderQuestions();
+        updateProgress();
+        document.getElementById("refleksi").scrollIntoView({ behavior: "smooth" });
+      }
+    });
+    document.getElementById("start-button").addEventListener("click", () => {
+      document.getElementById("refleksi").scrollIntoView({ behavior: "smooth" });
+    });
+
+    renderQuestions();
+    updateProgress();
+  </script>
+</body>
+</html>
